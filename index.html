@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Edge — Sound Bath at the AGA</title>
+<style>
+  :root{ --bg:#1a1612; --bg2:#221c15; --gold:#c9a25a; --gold2:#e7c987; --cream:#f3ece0; --dim:#9c8e79; }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  html,body{ background:var(--bg); color:var(--cream);
+    font-family:Georgia,'Times New Roman',serif; -webkit-font-smoothing:antialiased; }
+  .slide{ height:100vh; display:none; flex-direction:column; justify-content:center; align-items:center;
+    text-align:center; padding:8vh 9vw; gap:22px;
+    background:radial-gradient(circle at 50% 38%, var(--bg2), var(--bg) 72%); }
+  .slide.on{ display:flex; }
+  .kicker{ color:var(--gold); letter-spacing:.34em; text-transform:uppercase; font-size:13px;
+    font-family:-apple-system,sans-serif; }
+  h1{ font-size:clamp(40px,7vw,76px); font-weight:400; line-height:1.05; }
+  .it{ color:var(--gold2); font-style:italic; }
+  h2{ font-size:clamp(28px,5vw,50px); font-weight:400; line-height:1.1; }
+  .big{ font-size:clamp(22px,3.2vw,34px); color:var(--gold2); font-style:italic; line-height:1.4; max-width:840px; }
+  p{ font-size:clamp(17px,2.2vw,23px); line-height:1.55; color:var(--cream); max-width:720px; }
+  p.dim{ color:var(--dim); }
+  [contenteditable]:focus{ outline:1px dashed rgba(201,162,90,.5); outline-offset:6px; }
+  .nav{ position:fixed; top:50%; transform:translateY(-50%); background:none; border:none;
+    color:rgba(201,162,90,.45); font-size:38px; cursor:pointer; padding:16px; z-index:5; }
+  .nav:hover{ color:var(--gold2); } #prev{left:6px} #next{right:6px}
+  .dots{ position:fixed; bottom:20px; left:50%; transform:translateX(-50%); display:flex; gap:9px; z-index:5; }
+  .dot{ width:7px; height:7px; border-radius:50%; background:rgba(201,162,90,.3); cursor:pointer; }
+  .dot.on{ background:var(--gold2); }
+  .vibe-row{ display:flex; gap:22px; align-items:center; justify-content:center; flex-wrap:wrap; max-width:92vw; }
+  .vibe-row img{ height:58vh; max-width:42vw; object-fit:cover; border-radius:12px; box-shadow:0 10px 44px rgba(0,0,0,.55); }
+  @media print{
+    @page{ size:11in 8.5in; margin:0; }
+    .vibe-row img{ height:6in; }
+    html,body{ -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+    .slide{ display:flex !important; width:11in; height:8.5in; page-break-after:always; }
+    .nav,.dots{ display:none !important; }
+  }
+</style>
+</head>
+<body>
+
+<section class="slide on">
+  <div class="kicker" contenteditable>Earth Harmony · a proposal</div>
+  <h1 contenteditable>Meeting at the <span class="it">Edge</span></h1>
+  <p contenteditable>Where art, stillness &amp; wellbeing come together.</p>
+  <p class="dim" contenteditable>A unique sound bath made for the AGA.</p>
+</section>
+
+<section class="slide">
+  <div class="kicker" contenteditable>The Idea</div>
+  <p class="big" contenteditable>In nature, life is richest at the edges — where two ecosystems meet.</p>
+  <p contenteditable>Where art and wellness cross-pollinate, something new is born — an experience that could only happen here.</p>
+</section>
+
+<section class="slide">
+  <div class="kicker" contenteditable>The Experience</div>
+  <h2 contenteditable>Intention &amp; <span class="it">Design.</span></h2>
+  <p contenteditable>Imagine a blend of live audio-reactive visuals, math-based mandalas, or a synth-and-acoustic hybrid experience. Curate and design the experience together.</p>
+</section>
+
+<section class="slide">
+  <div class="kicker" contenteditable>Made Visible</div>
+  <h2 contenteditable>Sound you can <span class="it">see.</span></h2>
+  <p contenteditable>A multi-sensory experience — for those turning inward, or opening outward. Vibration, made visible.</p>
+</section>
+
+<section class="slide">
+  <div class="kicker" contenteditable>Who I Am</div>
+  <h2 contenteditable>Marcus · Earth Harmony</h2>
+  <p contenteditable>Facilitator, musician, composer. 20+ years holding space through sound. Singing bowls, gongs, handpan, voice.</p>
+</section>
+
+<section class="slide">
+  <div class="kicker" contenteditable>The Vibe</div>
+  <div class="vibe-row">
+    <img src="img/soundbath.jpg" alt="candlelit sound bath">
+    <img src="img/gongs.jpg" alt="Marcus with his gongs">
+  </div>
+</section>
+
+<section class="slide">
+  <div class="kicker" contenteditable>Plant a Seed</div>
+  <h2 contenteditable>Let's design it together.</h2>
+  <p contenteditable>A pilot evening — and a signature series, if it lands.</p>
+</section>
+
+<button class="nav" id="prev">‹</button>
+<button class="nav" id="next">›</button>
+<div class="dots"></div>
+
+<script>
+  const slides=[...document.querySelectorAll('.slide')]; let i=0;
+  const dots=document.querySelector('.dots');
+  slides.forEach((_,n)=>{ const d=document.createElement('div'); d.className='dot'+(n?'':' on');
+    d.onclick=()=>go(n); dots.appendChild(d); });
+  function go(n){ i=Math.max(0,Math.min(slides.length-1,n));
+    slides.forEach((s,k)=>s.classList.toggle('on',k===i));
+    [...dots.children].forEach((d,k)=>d.classList.toggle('on',k===i)); }
+  next.onclick=()=>go(i+1); prev.onclick=()=>go(i-1);
+  document.onkeydown=e=>{ if(e.target.isContentEditable)return;
+    if(e.key==='ArrowRight'||e.key===' ')go(i+1); if(e.key==='ArrowLeft')go(i-1); };
+</script>
+</body>
+</html>
