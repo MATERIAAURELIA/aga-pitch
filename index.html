@@ -28,13 +28,15 @@
   .dots{ position:fixed; bottom:20px; left:50%; transform:translateX(-50%); display:flex; gap:9px; z-index:5; }
   .dot{ width:7px; height:7px; border-radius:50%; background:rgba(201,162,90,.3); cursor:pointer; }
   .dot.on{ background:var(--gold2); }
-  .vibe-row{ display:flex; gap:22px; align-items:center; justify-content:center; flex-wrap:wrap; max-width:92vw; }
-  .vibe-row img{ height:58vh; max-width:42vw; object-fit:cover; border-radius:12px; box-shadow:0 10px 44px rgba(0,0,0,.55); }
+  .vibe-row{ display:flex; gap:20px; align-items:center; justify-content:center; flex-wrap:nowrap;
+    width:90vw; max-width:1050px; }
+  .vibe-row img{ flex:1 1 0; min-width:0; height:52vh; object-fit:cover; border-radius:12px;
+    box-shadow:0 10px 44px rgba(0,0,0,.55); }
   @media print{
     @page{ size:11in 8.5in; margin:0; }
-    .vibe-row img{ height:6in; }
     html,body{ -webkit-print-color-adjust:exact; print-color-adjust:exact; }
-    .slide{ display:flex !important; width:11in; height:8.5in; page-break-after:always; }
+    .slide{ display:flex !important; width:11in; height:8.5in; page-break-after:always; overflow:hidden; }
+    .vibe-row{ width:10in; } .vibe-row img{ height:4.7in; }
     .nav,.dots{ display:none !important; }
   }
 </style>
